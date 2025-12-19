@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waverity Portal</title>
+<style>
+    /* Фон с динамическим градиентом */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        background-size: 600% 600%;
+        animation: gradientBG 15s ease infinite;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    @keyframes gradientBG {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
+    header {
+        padding: 60px 20px;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    header h1 {
+        font-size: 2.8em;
+        margin: 0;
+        color: #ffffff;
+    }
+
+    header p {
+        font-size: 1.2em;
+        color: #cbd5e1;
+        margin-top: 10px;
+    }
+
+    main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 40px 20px;
+        gap: 30px;
+        flex: 1;
+    }
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    width: 240px; /* чуть уже */
+    padding: 20px 15px; /* меньше padding */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* содержимое ближе к центру */
+}
+
+.card h2 {
+    margin: 0 0 15px 0; /* меньше отступа снизу */
+    font-size: 1.3em; /* чуть меньше заголовок */
+    color: #f0f0f0;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+    .btn {
+        padding: 12px 22px;
+        font-weight: 600;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255,255,255,0.2);
+        transform: skewX(-20deg);
+        transition: all 0.5s ease;
+    }
+
+    .btn:hover::after {
+        left: 200%;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    @media (max-width: 600px) {
+        main {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card {
+            width: 90%;
+        }
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>Waverity Portal</h1>
+    <p>Centralized access to sites and systems</p>
+</header>
+<main>
+    <div class="card">
+        <h2>EI-G Service Desk</h2>
+        <div class="btn-container">
+            <a href="https://ticket.myit.az/" class="btn">Open Service Desk</a>
+        </div>
+    </div>
+    <div class="card">
+        <h2>Security Training</h2>
+        <div class="btn-container">
+            <a href="https://app.wizer-training.com/home/learning" class="btn">Start Training</a>
+        </div>
+    </div>
+    <div class="card">
+        <h2>Breezy</h2>
+        <div class="btn-container">
+            <a href="https://app.breezy.hr/app/c/eigroup/home" class="btn">Go to Breezy</a>
+        </div>
+    </div>
+    <div class="card">
+        <h2>Jira</h2>
+        <div class="btn-container">
+            <a href="https://waverity.atlassian.net/jira/projects" class="btn">Open Jira</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>
