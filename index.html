@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Waverity Portal</title>
+
 <style>
-    /* Фон с динамическим градиентом */
     body {
         font-family: 'Poppins', sans-serif;
         margin: 0;
@@ -21,9 +21,9 @@
     }
 
     @keyframes gradientBG {
-        0% {background-position: 0% 50%;}
-        50% {background-position: 100% 50%;}
-        100% {background-position: 0% 50%;}
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
 
     header {
@@ -54,38 +54,42 @@
         flex: 1;
     }
 
-.card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border-radius: 16px;
-    width: 240px; /* чуть уже */
-    padding: 20px 15px; /* меньше padding */
-    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* содержимое ближе к центру */
-}
+    .card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border-radius: 16px;
+        width: 240px;
+        padding: 20px 15px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-.card h2 {
-    margin: 0 0 15px 0; /* меньше отступа снизу */
-    font-size: 1.3em; /* чуть меньше заголовок */
-    color: #f0f0f0;
-}
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
 
-.btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
+    .card h2 {
+        margin: 0 0 15px 0;
+        font-size: 1.3em;
+        color: #f0f0f0;
+    }
 
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
 
     .btn {
         padding: 12px 22px;
         font-weight: 600;
-        color: #fff;
+        color: #ffffff;
         text-decoration: none;
         border-radius: 10px;
         background: linear-gradient(135deg, #ff7e5f, #feb47b);
@@ -128,36 +132,65 @@
     }
 </style>
 </head>
+
 <body>
+
 <header>
     <h1>Waverity Portal</h1>
     <p>Centralized access to sites and systems</p>
 </header>
+
 <main>
+
     <div class="card">
         <h2>EI-G Service Desk</h2>
         <div class="btn-container">
-            <a href="https://ticket.myit.az/" class="btn">Open Service Desk</a>
+            <a href="https://ticket.myit.az/"
+               class="btn"
+               target="_blank"
+               rel="noopener noreferrer">
+                Open Service Desk
+            </a>
         </div>
     </div>
+
     <div class="card">
         <h2>Security Training</h2>
         <div class="btn-container">
-            <a href="https://app.wizer-training.com/home/learning" class="btn">Start Training</a>
+            <a href="https://app.wizer-training.com/home/learning"
+               class="btn"
+               target="_blank"
+               rel="noopener noreferrer">
+                Start Training
+            </a>
         </div>
     </div>
+
     <div class="card">
         <h2>Breezy</h2>
         <div class="btn-container">
-            <a href="https://app.breezy.hr/app/c/eigroup/home" class="btn">Go to Breezy</a>
+            <a href="https://app.breezy.hr/app/c/eigroup/home"
+               class="btn"
+               target="_blank"
+               rel="noopener noreferrer">
+                Go to Breezy
+            </a>
         </div>
     </div>
+
     <div class="card">
         <h2>Jira</h2>
         <div class="btn-container">
-            <a href="https://waverity.atlassian.net/jira/projects" class="btn">Open Jira</a>
+            <a href="https://waverity.atlassian.net/jira/projects"
+               class="btn"
+               target="_blank"
+               rel="noopener noreferrer">
+                Open Jira
+            </a>
         </div>
     </div>
+
 </main>
+
 </body>
 </html>
