@@ -2,196 +2,313 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>EIG Portal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Waverity Portal</title>
+ 
+    <!-- Teams SDK -->
+<script src="https://res.cdn.office.net/teams-js/2.19.0/js/MicrosoftTeams.min.js"></script>
+ 
+    <style>
 
-<style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-        background-size: 600% 600%;
-        animation: gradientBG 15s ease infinite;
-        color: #ffffff;
-        text-align: center;
-    }
+        /* ===== THEME VARIABLES ===== */
 
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+        :root {
 
-    header {
-        padding: 60px 20px;
-        backdrop-filter: blur(10px);
-        background: rgba(255, 255, 255, 0.05);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
+            --bg: #ffffff;
 
-    header h1 {
-        font-size: 2.8em;
-        margin: 0;
-        color: #ffffff;
-    }
+            --card: #f3f4f6;
 
-    header p {
-        font-size: 1.2em;
-        color: #cbd5e1;
-        margin-top: 10px;
-    }
+            --accent: #6366f1;
 
-    main {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 40px 20px;
-        gap: 30px;
-        flex: 1;
-    }
+            --text: #111827;
 
-    .card {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(15px);
-        border-radius: 16px;
-        width: 240px;
-        padding: 20px 15px;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+            --muted: #6b7280;
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-    }
-
-    .card h2 {
-        margin: 0 0 15px 0;
-        font-size: 1.3em;
-        color: #f0f0f0;
-    }
-
-    .btn-container {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-
-    .btn {
-        padding: 12px 22px;
-        font-weight: 600;
-        color: #ffffff;
-        text-decoration: none;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #ff7e5f, #feb47b);
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .btn::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: rgba(255,255,255,0.2);
-        transform: skewX(-20deg);
-        transition: all 0.5s ease;
-    }
-
-    .btn:hover::after {
-        left: 200%;
-    }
-
-    .btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-    }
-
-    @media (max-width: 600px) {
-        main {
-            flex-direction: column;
-            align-items: center;
         }
+ 
+        :root[data-theme="dark"] {
+
+            --bg: #0f172a;
+
+            --card: #111827;
+
+            --text: #e5e7eb;
+
+            --muted: #9ca3af;
+
+        }
+ 
+        :root[data-theme="contrast"] {
+
+            --bg: #000000;
+
+            --card: #000000;
+
+            --text: #ffffff;
+
+            --muted: #ffffff;
+
+        }
+ 
+        * {
+
+            box-sizing: border-box;
+
+        }
+ 
+        body {
+
+            margin: 0;
+
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+        }
+ 
+        .container {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            padding: 32px 20px 48px;
+
+        }
+ 
+        header {
+
+            margin-bottom: 32px;
+
+        }
+ 
+        h1 {
+
+            font-size: 2.2rem;
+
+            margin: 0 0 8px;
+
+        }
+ 
+        .subtitle {
+
+            color: var(--muted);
+
+        }
+ 
+        /* ===== GRID LOGIC ===== */
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+
+        }
+ 
+        .grid > .card:only-child {
+
+            grid-column: 1 / -1;
+
+        }
+ 
+        .grid > .card:nth-child(n+4) {
+
+            grid-column: 1 / -1;
+
+        }
+ 
+        /* ===== CARD ===== */
 
         .card {
-            width: 90%;
+
+            background: var(--card);
+
+            border-radius: 16px;
+
+            padding: 24px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
         }
-    }
+ 
+        :root[data-theme="dark"] .card {
+
+            background: linear-gradient(180deg, #0b1220, #020617);
+
+        }
+ 
+        .card h2 {
+
+            margin: 0 0 8px;
+
+            font-size: 1.25rem;
+
+        }
+ 
+        .card p {
+
+            margin: 0 0 20px;
+
+            color: var(--muted);
+
+            line-height: 1.5;
+
+            flex-grow: 1;
+
+        }
+ 
+        .card a {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 220px;
+
+            padding: 12px 0;
+
+            margin: 0 auto;
+
+            border-radius: 999px;
+
+            text-decoration: none;
+
+            color: #ffffff;
+
+            background: linear-gradient(135deg, var(--accent), #4f46e5);
+
+            font-weight: 600;
+
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+        }
+ 
+        .card a:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 12px 30px rgba(99,102,241,0.45);
+
+        }
 </style>
 </head>
-
+ 
 <body>
-
+<div class="container">
 <header>
-    <h1>Waverity Portal</h1>
-    <p>Centralized access to sites and systems</p>
+<h1>EIG Portal</h1>
+<div class="subtitle">
+
+            Centralized access to internal EI Group systems
+</div>
 </header>
+ 
+    <section class="grid">
+ 
+        <div class="card">
+<h2>EI-G Service Desk</h2>
+<p>Submit and track IT support requests, incidents and service tickets.</p>
+<a href="https://ticket.myit.az" target="_blank" rel="noopener noreferrer">
 
-<main>
-
-    <div class="card">
-        <h2>EI-G Service Desk</h2>
-        <div class="btn-container">
-            <a href="https://ticket.myit.az/"
-               class="btn"
-               target="_blank"
-               rel="noopener noreferrer">
                 Open Service Desk
-            </a>
-        </div>
-    </div>
+</a>
+</div>
+ 
+        <div class="card">
+<h2>Wizer Trainings</h2>
+<p>Security awareness and InfoSec training platform for employees.</p>
+<a href="https://app.wizer-training.com/home/learning"
 
-    <div class="card">
-        <h2>Security Training</h2>
-        <div class="btn-container">
-            <a href="https://app.wizer-training.com/home/learning"
-               class="btn"
-               target="_blank"
-               rel="noopener noreferrer">
-                Start Training
-            </a>
-        </div>
-    </div>
+               target="_blank" rel="noopener noreferrer">
 
-    <div class="card">
-        <h2>Breezy</h2>
-        <div class="btn-container">
-            <a href="https://app.breezy.hr/app/c/eigroup/home"
-               class="btn"
-               target="_blank"
-               rel="noopener noreferrer">
-                Go to Breezy
-            </a>
-        </div>
-    </div>
+                Open Trainings
+</a>
+</div>
+ 
+        <div class="card">
+<h2>Inventory System</h2>
+<p>IT and office assets inventory management system.</p>
+<a href="https://inventory.myit.az"
 
-    <div class="card">
-        <h2>Jira</h2>
-        <div class="btn-container">
-            <a href="https://waverity.atlassian.net/jira/projects"
-               class="btn"
-               target="_blank"
-               rel="noopener noreferrer">
-                Open Jira
-            </a>
-        </div>
-    </div>
+               target="_blank" rel="noopener noreferrer">
 
-</main>
+                Open Inventory
+</a>
+</div>
+ 
+        <div class="card">
+<h2>Paid Time Off</h2>
+<p>
 
+                Manage your paid leave, view how many days you have accumulated,
+
+                and see who is currently on vacation.
+</p>
+<a href="https://pto.ei-g.dev/profile"
+
+               target="_blank" rel="noopener noreferrer">
+
+                Open PTO
+</a>
+</div>
+ 
+    </section>
+</div>
+ 
+<script>
+
+    microsoftTeams.app.initialize().then(() => {
+
+        microsoftTeams.app.getContext().then(context => {
+
+            applyTheme(context.app.theme);
+
+        });
+ 
+        microsoftTeams.app.registerOnThemeChangeHandler(theme => {
+
+            applyTheme(theme);
+
+        });
+
+    });
+ 
+    function applyTheme(theme) {
+
+        if (theme === "dark" || theme === "contrast") {
+
+            document.documentElement.setAttribute("data-theme", theme);
+
+        } else {
+
+            // light / default → REMOVE attribute
+
+            document.documentElement.removeAttribute("data-theme");
+
+        }
+
+    }
+</script>
+ 
 </body>
 </html>
-
+ 
