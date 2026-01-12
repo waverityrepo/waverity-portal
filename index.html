@@ -4,322 +4,222 @@
 <meta charset="UTF-8">
 <title>Waverity Portal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-    <!-- Teams SDK -->
+
+<!-- Microsoft Teams SDK -->
 <script src="https://res.cdn.office.net/teams-js/2.19.0/js/MicrosoftTeams.min.js"></script>
- 
-    <style>
 
-        /* ===== THEME VARIABLES ===== */
-
-        :root {
-
-            --bg: #ffffff;
-
-            --card: #f3f4f6;
-
-            --accent: #6366f1;
-
-            --text: #111827;
-
-            --muted: #6b7280;
-
-        }
- 
-        :root[data-theme="dark"] {
-
-            --bg: #0f172a;
-
-            --card: #111827;
-
-            --text: #e5e7eb;
-
-            --muted: #9ca3af;
-
-        }
- 
-        :root[data-theme="contrast"] {
-
-            --bg: #000000;
-
-            --card: #000000;
-
-            --text: #ffffff;
-
-            --muted: #ffffff;
-
-        }
- 
-        * {
-
-            box-sizing: border-box;
-
-        }
- 
-        body {
-
-            margin: 0;
-
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-
-            background: var(--bg);
-
-            color: var(--text);
-
-            min-height: 100vh;
-
-            display: flex;
-
-            justify-content: center;
-
-        }
- 
-        .container {
-
-            width: 100%;
-
-            max-width: 1100px;
-
-            padding: 32px 20px 48px;
-
-        }
- 
-        header {
-
-            margin-bottom: 32px;
-
-        }
- 
-        h1 {
-
-            font-size: 2.2rem;
-
-            margin: 0 0 8px;
-
-        }
- 
-        .subtitle {
-
-            color: var(--muted);
-
-        }
- 
-        /* ===== GRID LOGIC ===== */
-
-        .grid {
-
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 20px;
-
-        }
- 
-        .grid > .card:only-child {
-
-            grid-column: 1 / -1;
-
-        }
- 
-        .grid > .card:nth-child(n+4) {
-
-            grid-column: 1 / -1;
-
-        }
- 
-        /* ===== CARD ===== */
-
-        .card {
-
-            background: var(--card);
-
-            border-radius: 16px;
-
-            padding: 24px;
-
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: space-between;
-
-        }
- 
-        :root[data-theme="dark"] .card {
-
-            background: linear-gradient(180deg, #0b1220, #020617);
-
-        }
- 
-        .card h2 {
-
-            margin: 0 0 8px;
-
-            font-size: 1.25rem;
-
-        }
- 
-        .card p {
-
-            margin: 0 0 20px;
-
-            color: var(--muted);
-
-            line-height: 1.5;
-
-            flex-grow: 1;
-
-        }
- 
-        .card a {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            width: 220px;
-
-            padding: 12px 0;
-
-            margin: 0 auto;
-
-            border-radius: 999px;
-
-            text-decoration: none;
-
-            color: #ffffff;
-
-            background: linear-gradient(135deg, var(--accent), #4f46e5);
-
-            font-weight: 600;
-
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-
-        }
- 
-        .card a:hover {
-
-            transform: translateY(-2px);
-
-            box-shadow: 0 12px 30px rgba(99,102,241,0.45);
-
-        }
+<style>
+/* ===== THEME VARIABLES ===== */
+:root {
+    --bg: #ffffff;
+    --card: #f3f4f6;
+    --accent: #6366f1;
+    --text: #111827;
+    --muted: #6b7280;
+}
+
+:root[data-theme="dark"] {
+    --bg: #0f172a;
+    --card: #111827;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+}
+
+:root[data-theme="contrast"] {
+    --bg: #000000;
+    --card: #000000;
+    --text: #ffffff;
+    --muted: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    padding: 32px 20px 48px;
+}
+
+header {
+    margin-bottom: 32px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin: 0 0 8px;
+}
+
+.subtitle {
+    color: var(--muted);
+}
+
+/* ===== GRID ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* 4–5 карточки — две плитки рядом */
+.grid > .card:nth-child(4),
+.grid > .card:nth-child(5) {
+    grid-column: span 1;
+}
+
+/* 6 и далее — на всю ширину */
+.grid > .card:nth-child(n+6) {
+    grid-column: 1 / -1;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+}
+
+:root[data-theme="dark"] .card {
+    background: linear-gradient(180deg, #0b1220, #020617);
+}
+
+.card h2 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+}
+
+.card p {
+    margin: 0 0 24px;
+    color: var(--muted);
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.card a {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    padding: 12px 0;
+    border-radius: 999px;
+    text-decoration: none;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--accent), #4f46e5);
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(99,102,241,0.45);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 </head>
- 
+
 <body>
 <div class="container">
+
 <header>
-<h1>EIG Portal</h1>
-<div class="subtitle">
-
-            Centralized access to internal Waverity systems
-</div>
+    <h1>EIG Portal</h1>
+    <div class="subtitle">
+        Centralized access to internal Waverity systems
+    </div>
 </header>
- 
-    <section class="grid">
- 
-        <div class="card">
-<h2>EI-G Service Desk</h2>
-<p>Submit and track IT support requests, incidents and service tickets.</p>
-<a href="https://ticket.myit.az" target="_blank" rel="noopener noreferrer">
 
-                Open Service Desk
-</a>
+<section class="grid">
+
+    <div class="card">
+        <h2>EI-G Service Desk</h2>
+        <p>Submit and track IT support requests, incidents and service tickets.</p>
+        <a href="https://ticket.myit.az" target="_blank" rel="noopener noreferrer">
+            Open Service Desk
+        </a>
+    </div>
+
+    <div class="card">
+        <h2>Wizer Trainings</h2>
+        <p>Security awareness and InfoSec training platform for employees.</p>
+        <a href="https://app.wizer-training.com/home/learning" target="_blank" rel="noopener noreferrer">
+            Open Trainings
+        </a>
+    </div>
+
+    <div class="card">
+        <h2>Inventory System</h2>
+        <p>IT and office assets inventory management system.</p>
+        <a href="https://inventory.myit.az" target="_blank" rel="noopener noreferrer">
+            Open Inventory
+        </a>
+    </div>
+
+    <div class="card">
+        <h2>Paid Time Off</h2>
+        <p>
+            Manage your paid leave, view how many days you have accumulated,
+            and see who is currently on vacation.
+        </p>
+        <a href="https://pto.ei-g.dev/profile" target="_blank" rel="noopener noreferrer">
+            Open PTO
+        </a>
+    </div>
+
+    <div class="card">
+        <h2>Jira Projects</h2>
+        <p>
+            Project and task management system for tracking work,
+            incidents, and internal initiatives.
+        </p>
+        <a href="https://waverity.atlassian.net/jira/projects" target="_blank" rel="noopener noreferrer">
+            Open Jira
+        </a>
+    </div>
+
+</section>
 </div>
- 
-        <div class="card">
-<h2>Wizer Trainings</h2>
-<p>Security awareness and InfoSec training platform for employees.</p>
-<a href="https://app.wizer-training.com/home/learning"
 
-               target="_blank" rel="noopener noreferrer">
-
-                Open Trainings
-</a>
-</div>
- 
-        <div class="card">
-<h2>Inventory System</h2>
-<p>IT and office assets inventory management system.</p>
-<a href="https://inventory.myit.az"
-
-               target="_blank" rel="noopener noreferrer">
-
-                Open Inventory
-</a>
-</div>
- 
-        <div class="card">
-<h2>Paid Time Off</h2>
-<p>
-
-                Manage your paid leave, view how many days you have accumulated,
-
-                and see who is currently on vacation.
-</p>
-<a href="https://pto.ei-g.dev/profile"
-
-               target="_blank" rel="noopener noreferrer">
-
-                Open PTO
-</a>
-</div>
- <div class="card">
-    <h2>Jira Projects</h2>
-    <p>
-        Project and task management system for tracking work,
-        incidents, and internal initiatives.
-    </p>
-    <a href="https://waverity.atlassian.net/jira/projects"
-       target="_blank" rel="noopener noreferrer">
-        Open Jira
-    </a>
-</div>
-    </section>
-</div>
- 
 <script>
+microsoftTeams.app.initialize().then(() => {
 
-    microsoftTeams.app.initialize().then(() => {
-
-        microsoftTeams.app.getContext().then(context => {
-
-            applyTheme(context.app.theme);
-
-        });
- 
-        microsoftTeams.app.registerOnThemeChangeHandler(theme => {
-
-            applyTheme(theme);
-
-        });
-
+    microsoftTeams.app.getContext().then(context => {
+        applyTheme(context.app.theme);
     });
- 
-    function applyTheme(theme) {
 
-        if (theme === "dark" || theme === "contrast") {
+    microsoftTeams.app.registerOnThemeChangeHandler(theme => {
+        applyTheme(theme);
+    });
 
-            document.documentElement.setAttribute("data-theme", theme);
+});
 
-        } else {
-
-            // light / default → REMOVE attribute
-
-            document.documentElement.removeAttribute("data-theme");
-
-        }
-
+function applyTheme(theme) {
+    if (theme === "dark" || theme === "contrast") {
+        document.documentElement.setAttribute("data-theme", theme);
+    } else {
+        document.documentElement.removeAttribute("data-theme");
     }
+}
 </script>
- 
+
 </body>
 </html>
- 
-
